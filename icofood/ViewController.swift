@@ -10,16 +10,31 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak private var webView: UIWebView!
+    @IBAction func setupWebButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            webView.goBack()
+        case 1:
+            webView.goForward()
+        case 2:
+            webView.reload()
+        default:
+            print("Error")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        setupWebView()
+        print("added gif")
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    private func setupWebView() {
+        guard let url = URL(string: "https://icofood.store") else {
+            return
+        }
+        let urlRequest = URLRequest(url: url)
+        webView.loadRequest(urlRequest)
     }
-
-
 }
-
